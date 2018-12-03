@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "370117104559",
+    "firebase_url": "https://epe2asfinal.firebaseio.com",
+    "project_id": "epe2asfinal",
+    "storage_bucket": "epe2asfinal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370117104559:android:d0d2b838da19eb10",
+        "android_client_info": {
+          "package_name": "com.example.neodestiny.epe2_firestore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "370117104559-mphk8au5ulris961o7bh47ser2nove1f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.neodestiny.epe2_firestore",
+            "certificate_hash": "1115aae5d6e0a981869df1d84951fd4101ffad23"
+          }
+        },
+        {
+          "client_id": "370117104559-6qk3d0afslt2mvj4h5uc1v3sm4a5s9ej.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9LxsWWZayLjU_hEwp7v6dMpTEFzg-F2o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "370117104559-6qk3d0afslt2mvj4h5uc1v3sm4a5s9ej.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
