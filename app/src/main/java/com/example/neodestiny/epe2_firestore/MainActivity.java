@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+    Cliente clienteSelected;
 
     private List<Cliente> listCliente = new ArrayList<Cliente>();
     ArrayAdapter<Cliente> arrayAdapterCliente;
@@ -46,6 +49,18 @@ public class MainActivity extends AppCompatActivity {
         lv_lista = findViewById(R.id.lv_lista);
         inicializarFirebase();
         listarDatos();
+
+        lv_lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                clienteSelected=(Cliente) parent.getItemAtPosition(position);
+                et_rut.setText(clienteSelected.getRut());
+                et_nombre.setText(clienteSelected.getNombre());
+                et_telefono.setText(clienteSelected.getTelefono());
+                et_email.setText(clienteSelected.getCorreo());
+            }
+        });
+
     }
 
     private void listarDatos() {
@@ -110,6 +125,13 @@ public class MainActivity extends AppCompatActivity {
                 if (nombre.equals("") || rut.equals("") || telefono.equals("") || email.equals("")) {
                     validacion();
                 } else {
+                    Cliente c = new Cliente();
+                    c.setUid(clienteSelected.getUid());
+                    c.setRut(et_rut.getText().toString().trim());
+                    c.setNombre(et_nombre.getText().toString().trim());
+                    c.setTelefono(et_telefono.getText().toString().trim());
+                    c.setCorreo(et_email.getText().toString().trim());
+                    databaseReference.child("Cliente").child(c.getUid()).setValue(c);
                     Toast.makeText(this, "Guardar", Toast.LENGTH_SHORT).show();
                     limpiarCajas();
                 }
