@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                     c.setTelefono(telefono);
                     c.setCorreo(email);
                     databaseReference.child("Cliente").child(c.getUid()).setValue(c);
-                    Toast.makeText(this, "Agregar", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Cliente agregado", Toast.LENGTH_SHORT).show();
                     limpiarCajas();
                 }
                 break;
@@ -132,12 +132,20 @@ public class MainActivity extends AppCompatActivity {
                     c.setTelefono(et_telefono.getText().toString().trim());
                     c.setCorreo(et_email.getText().toString().trim());
                     databaseReference.child("Cliente").child(c.getUid()).setValue(c);
-                    Toast.makeText(this, "Guardar", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Cliente actualizado", Toast.LENGTH_SHORT).show();
                     limpiarCajas();
                 }
                 break;
             case R.id.ic_delete:
-                Toast.makeText(this, "Eliminar", Toast.LENGTH_SHORT).show();
+                if (nombre.equals("") || rut.equals("") || telefono.equals("") || email.equals("")) {
+                    validacion();
+                } else {
+                    Cliente c = new Cliente();
+                    c.setUid(clienteSelected.getUid());
+                    databaseReference.child("Cliente").child(c.getUid()).removeValue();
+                    Toast.makeText(this, "Cliente eliminado", Toast.LENGTH_SHORT).show();
+                    limpiarCajas();
+                }
                 break;
 
             default:
