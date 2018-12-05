@@ -11,7 +11,7 @@
         android:id="@+id/tv_titulo1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Mantenedor de Productos"
+        android:text="Mantenedor de Mascotas"
         android:gravity="center"
         android:textSize="30dp" />
 
@@ -22,7 +22,7 @@
 
 
         <EditText
-            android:id="@+id/et_nombreProducto"
+            android:id="@+id/et_nombreMascota"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -37,7 +37,7 @@
 
 
         <EditText
-            android:id="@+id/et_precioProducto"
+            android:id="@+id/et_tipoAnimal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -48,11 +48,11 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="N° Pasillo:">
+        android:hint="Nombre dueño:">
 
 
         <EditText
-            android:id="@+id/et_pasilloProducto"
+            android:id="@+id/et_dueno"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -61,10 +61,33 @@
     </android.support.design.widget.TextInputLayout>
 
     <TextView
+        android:id="@+id/tv_subtitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Seleccione sexo de la mascota:"/>
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/rb_macho"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Macho"/>
+
+        <RadioButton
+            android:id="@+id/rb_hembra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hembra"/>
+
+    </RadioGroup>
+
+    <TextView
         android:id="@+id/tv_titulo2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Lista de productos"
+        android:text="Lista de mascotas"
         android:gravity="center"
         android:textSize="30dp" />
 
@@ -72,6 +95,8 @@
         android:id="@+id/lv_lista"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical"></ListView>
+        android:scrollbars="vertical">
+
+    </ListView>
 
 </LinearLayout>
