@@ -53,9 +53,16 @@ public class ProductoActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 productoSelected=(Producto) parent.getItemAtPosition(position);
                 et_nombreMascota.setText(productoSelected.getNombre());
-                et_.setText(clienteSelected.getNombre());
-                et_telefono.setText(clienteSelected.getTelefono());
-                et_email.setText(clienteSelected.getCorreo());
+                et_tipoAnimal.setText(productoSelected.getTipoAnimal());
+                et_dueno.setText(productoSelected.getNombreDueno());
+                if(productoSelected.getSexo().equals("Macho"))
+                {
+                    rb_macho.setChecked(true);
+                }
+                else
+                {
+                    rb_hembra.setChecked(true);
+                }
             }
         });
     }
@@ -101,7 +108,16 @@ public class ProductoActivity extends AppCompatActivity {
         String tipoAnimal = et_tipoAnimal.getText().toString();
         String dueño = et_dueno.getText().toString();
         String sexo="";
+        if(rb_macho.isChecked())
+        {
+            sexo="Macho";
+        }
+        else
+        {
+            sexo="Hembra";
+        }
 
+        
         return true;
     }
 
