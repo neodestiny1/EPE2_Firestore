@@ -1,7 +1,7 @@
 package com.example.neodestiny.epe2_firestore.model;
 
 public class Producto {
-    private String nombre, tipoProducto, precio, stock ;
+    private String nombre, tipoAnimal, nombreDueno, sexo ;
 
     public String getNombre() {
         return nombre;
@@ -11,32 +11,32 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public String getTipoProducto() {
-        return tipoProducto;
+    public String getTipoAnimal() {
+        return tipoAnimal;
     }
 
-    public void setTipoProducto(String tipoProducto) {
-        this.tipoProducto = tipoProducto;
+    public void setTipoAnimal(String tipoAnimal) {
+        this.tipoAnimal = tipoAnimal;
     }
 
-    public String getPrecio() {
-        return precio;
+    public String getNombreDueno() {
+        return nombreDueno;
     }
 
-    public void setPrecio(String precio) {
-        this.precio = precio;
+    public void setNombreDueno(String nombreDueno) {
+        this.nombreDueno = nombreDueno;
     }
 
-    public String getStock() {
-        return stock;
-    }
-
-    public void setStock(String stock) {
-        this.stock = stock;
+    public String getSexo() {
+        return sexo;
     }
 
     @Override
     public String toString() {
         return nombre;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 }
