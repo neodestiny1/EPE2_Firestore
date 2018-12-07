@@ -9,6 +9,12 @@
     android:layout_height="match_parent"
     tools:context=".MenuIngresoActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:srcCompat="@drawable/imglogo" />
+
     <TextView
         android:id="@+id/tv_titulo"
         android:layout_width="match_parent"
