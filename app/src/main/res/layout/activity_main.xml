@@ -67,6 +67,24 @@
             android:inputType="textEmailAddress"/>
 
     </android.support.design.widget.TextInputLayout>
+    <TextView
+        android:id="@+id/tv_tituloCheckbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ingrese forma de pago"/>
+
+    <CheckBox
+        android:id="@+id/cb_efectivo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Efectivo"/>
+
+    <CheckBox
+        android:id="@+id/cb_tarjeta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="tarjeta"/>
+
 
     <TextView
         android:id="@+id/tv_titulo"

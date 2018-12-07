@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText et_rut, et_nombre, et_telefono, et_email;
     ListView lv_lista;
+    CheckBox cb_efectivo, cb_tarjeta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,17 +49,31 @@ public class MainActivity extends AppCompatActivity {
         et_telefono = findViewById(R.id.et_telefonoCliente);
         et_email = findViewById(R.id.et_correoCliente);
         lv_lista = findViewById(R.id.lv_lista);
+        cb_efectivo = findViewById(R.id.cb_efectivo);
+        cb_tarjeta = findViewById(R.id.cb_tarjeta);
         inicializarFirebase();
         listarDatos();
 
         lv_lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                clienteSelected=(Cliente) parent.getItemAtPosition(position);
+                limpiarCajas();
+                clienteSelected = (Cliente) parent.getItemAtPosition(position);
                 et_rut.setText(clienteSelected.getRut());
                 et_nombre.setText(clienteSelected.getNombre());
                 et_telefono.setText(clienteSelected.getTelefono());
                 et_email.setText(clienteSelected.getCorreo());
+
+                if (clienteSelected.getPago().equals("Ambos")) {
+                    cb_tarjeta.setChecked(true);
+                    cb_efectivo.setChecked(true);
+                } else if(clienteSelected.getPago().equals("Tarjeta")){
+                    cb_tarjeta.setChecked(true);
+                }else if(clienteSelected.getPago().equals("Efectivo"))
+                {
+                    cb_efectivo.setChecked(true);
+                }
+
             }
         });
 
@@ -67,15 +83,14 @@ public class MainActivity extends AppCompatActivity {
         databaseReference.child("Cliente").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            listCliente.clear();
-            for(DataSnapshot objSnaptshot: dataSnapshot.getChildren())
-            {
-                Cliente c = objSnaptshot.getValue(Cliente.class);
-                listCliente.add(c);
+                listCliente.clear();
+                for (DataSnapshot objSnaptshot : dataSnapshot.getChildren()) {
+                    Cliente c = objSnaptshot.getValue(Cliente.class);
+                    listCliente.add(c);
 
-                arrayAdapterCliente = new ArrayAdapter<Cliente>(MainActivity.this, android.R.layout.simple_list_item_1, listCliente);
-                lv_lista.setAdapter(arrayAdapterCliente);
-            }
+                    arrayAdapterCliente = new ArrayAdapter<Cliente>(MainActivity.this, android.R.layout.simple_list_item_1, listCliente);
+                    lv_lista.setAdapter(arrayAdapterCliente);
+                }
             }
 
             @Override
@@ -105,6 +120,15 @@ public class MainActivity extends AppCompatActivity {
         String telefono = et_telefono.getText().toString();
         String email = et_email.getText().toString();
 
+        String pago = "";
+        if (cb_efectivo.isChecked() && cb_tarjeta.isChecked())
+            pago = "Ambos";
+        else if (cb_efectivo.isChecked())
+            pago = "Efectivo";
+        else if (cb_tarjeta.isChecked())
+            pago = "Tarjeta";
+
+
         switch (item.getItemId()) {
             case R.id.ic_add:
                 if (nombre.equals("") || rut.equals("") || telefono.equals("") || email.equals("")) {
@@ -116,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
                     c.setNombre(nombre);
                     c.setTelefono(telefono);
                     c.setCorreo(email);
+                    c.setPago(pago);
                     databaseReference.child("Cliente").child(c.getUid()).setValue(c);
                     Toast.makeText(this, "Cliente agregado", Toast.LENGTH_SHORT).show();
                     limpiarCajas();
@@ -159,6 +184,8 @@ public class MainActivity extends AppCompatActivity {
         et_email.setText("");
         et_rut.setText("");
         et_telefono.setText("");
+        cb_efectivo.setChecked(false);
+        cb_tarjeta.setChecked(false);
     }
 
     private void validacion() {

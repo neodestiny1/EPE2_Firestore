@@ -2,7 +2,7 @@ package com.example.neodestiny.epe2_firestore.model;
 
 public class Cliente {
 
-    private String rut, nombre, telefono, correo, uid;
+    private String rut, nombre, telefono, correo, uid, pago;
 
     public Cliente() {
     }
@@ -45,6 +45,14 @@ public class Cliente {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public String getPago() {
+        return pago;
+    }
+
+    public void setPago(String pago) {
+        this.pago = pago;
     }
 
     @Override

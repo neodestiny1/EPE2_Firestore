@@ -6,14 +6,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 public class MenuIngresoActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
     private AdView mAdView;
+
+    private InterstitialAd mInterstitialAd;
 
     Button btn_cliente, btn_mascota;
 
@@ -27,6 +31,34 @@ public class MenuIngresoActivity extends AppCompatActivity {
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener(){
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+                finish();
+            }
+        });
+    }
+
+    public void showInterstitial()
+    {
+        if(mInterstitialAd.isLoaded())
+        {
+            mInterstitialAd.show();
+        }else{
+            finish();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        showInterstitial();
     }
 
     public void seleccionMenu(View view) {
