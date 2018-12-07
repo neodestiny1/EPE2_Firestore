@@ -77,14 +77,13 @@ public class ProductoActivity extends AppCompatActivity {
     }
 
     private void listarDatos() {
-        databaseReference.child("Producto").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Mascota").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listProducto.clear();
                 for (DataSnapshot objSnaptshot : dataSnapshot.getChildren()) {
                     Producto p = objSnaptshot.getValue(Producto.class);
                     listProducto.add(p);
-
                     arrayAdapterProducto = new ArrayAdapter<Producto>(ProductoActivity.this, android.R.layout.simple_list_item_1, listProducto);
                     lv_lista2.setAdapter(arrayAdapterProducto);
                 }
@@ -109,12 +108,12 @@ public class ProductoActivity extends AppCompatActivity {
         String nombre = et_nombreMascota.getText().toString();
         String tipoAnimal = et_tipoAnimal.getText().toString();
         String dueño = et_dueno.getText().toString();
-        String sexo = "";
-        if (rb_macho.isChecked()) {
-            sexo = "Macho";
-        } else if (rb_hembra.isChecked()) {
-            sexo = "Hembra";
-        }
+        String sexo="";
+        if(rb_macho.isChecked())
+            sexo="Macho";
+        else if(rb_hembra.isChecked())
+            sexo="Hembra";
+
 
         switch (item.getItemId()) {
             case R.id.ic_add:
@@ -133,12 +132,21 @@ public class ProductoActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.ic_save:
-                Toast.makeText(this, "Mascota Agregada", Toast.LENGTH_SHORT).show();
-                limpiarCajas();
+                if (nombre.equals("") || tipoAnimal.equals("") || dueño.equals("") || sexo.equals("")) {
+                    validaciones();
+                } else {
+                    Producto p = new Producto();
+                    p.setUid(UUID.randomUUID().toString());
+                    p.setNombre(nombre);
+                    p.setTipoAnimal(tipoAnimal);
+                    p.setNombreDueno(dueño);
+                    p.setSexo(sexo);
+                    databaseReference.child("Mascota").child(p.getUid()).setValue(p);
+                    Toast.makeText(this, "Mascota Actualizada", Toast.LENGTH_SHORT).show();
+                    limpiarCajas();
+                }
                 break;
             case R.id.ic_delete:
-                Toast.makeText(this, "Mascota Agregada", Toast.LENGTH_SHORT).show();
-                limpiarCajas();
                 break;
             default:
                 break;
