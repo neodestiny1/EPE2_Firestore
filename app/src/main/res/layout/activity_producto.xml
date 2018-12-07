@@ -66,6 +66,7 @@
         android:layout_height="wrap_content"
         android:text="Seleccione sexo de la mascota:"/>
     <RadioGroup
+        android:id="@+id/rb_grupo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
