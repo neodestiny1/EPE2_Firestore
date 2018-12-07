@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.example.neodestiny.epe2_firestore.model.Cliente;
 import com.example.neodestiny.epe2_firestore.model.Producto;
@@ -24,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class ProductoActivity extends AppCompatActivity {
 
@@ -48,7 +50,7 @@ public class ProductoActivity extends AppCompatActivity {
         rb_macho = findViewById(R.id.rb_macho);
         rb_hembra = findViewById(R.id.rb_hembra);
         lv_lista2 = findViewById(R.id.lv_lista2);
-        rb_grupo=findViewById(R.id.rb_grupo);
+        rb_grupo = findViewById(R.id.rb_grupo);
         inicializarFirebase();
         listarDatos();
 
@@ -110,13 +112,26 @@ public class ProductoActivity extends AppCompatActivity {
         String sexo = "";
         if (rb_macho.isChecked()) {
             sexo = "Macho";
-        } else if (rb_hembra.isChecked()){
+        } else if (rb_hembra.isChecked()) {
             sexo = "Hembra";
         }
 
         switch (item.getItemId()) {
             case R.id.ic_add:
-                validaciones();
+                if (nombre.equals("") || tipoAnimal.equals("") || dueño.equals("") || sexo.equals("")) {
+                    validaciones();
+                }else
+                {
+                    Producto p = new Producto();
+                    p.setUid(UUID.randomUUID().toString());
+                    p.setNombre(nombre);
+                    p.setTipoAnimal(tipoAnimal);
+                    p.setNombreDueno(dueño);
+                    p.setSexo(sexo);
+                    databaseReference.child("Mascota").child(p.getUid()).setValue(p);
+                    Toast.makeText(this, "Mascota Agregada", Toast.LENGTH_SHORT).show();
+                    limpiarCajas();
+                }
                 break;
             case R.id.ic_save:
                 break;
@@ -125,6 +140,15 @@ public class ProductoActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    private void limpiarCajas() {
+        et_nombreMascota.setText("");
+        et_tipoAnimal.setText("");
+        et_dueno.setText("");
+        rb_macho.setChecked(false);
+        rb_hembra.setChecked(false);
+
     }
 
     private void validaciones() {

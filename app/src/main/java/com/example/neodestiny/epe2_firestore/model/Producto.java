@@ -1,7 +1,15 @@
 package com.example.neodestiny.epe2_firestore.model;
 
 public class Producto {
-    private String nombre, tipoAnimal, nombreDueno, sexo ;
+    private String nombre, tipoAnimal, nombreDueno, sexo, uid ;
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
     public String getNombre() {
         return nombre;
