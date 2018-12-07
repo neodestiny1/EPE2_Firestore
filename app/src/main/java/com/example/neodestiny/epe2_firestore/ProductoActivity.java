@@ -108,11 +108,11 @@ public class ProductoActivity extends AppCompatActivity {
         String nombre = et_nombreMascota.getText().toString();
         String tipoAnimal = et_tipoAnimal.getText().toString();
         String dueño = et_dueno.getText().toString();
-        String sexo="";
-        if(rb_macho.isChecked())
-            sexo="Macho";
-        else if(rb_hembra.isChecked())
-            sexo="Hembra";
+        String sexo = "";
+        if (rb_macho.isChecked())
+            sexo = "Macho";
+        else if (rb_hembra.isChecked())
+            sexo = "Hembra";
 
 
         switch (item.getItemId()) {
@@ -151,16 +151,15 @@ public class ProductoActivity extends AppCompatActivity {
                     validaciones();
                 } else {
                     Producto p = new Producto();
-                    p.setUid(UUID.randomUUID().toString());
-                    databaseReference.child("Cliente").child(p.getUid()).removeValue();
-                    Toast.makeText(this, "Mascota Actualizada", Toast.LENGTH_SHORT).show();
+                    p.setUid(productoSelected.getUid());
+                    databaseReference.child("Mascota").child(p.getUid()).removeValue();
+                    Toast.makeText(this, "Mascota Eliminada", Toast.LENGTH_SHORT).show();
                     limpiarCajas();
                 }
                 break;
             default:
                 break;
         }
-
         return true;
     }
 
@@ -174,8 +173,6 @@ public class ProductoActivity extends AppCompatActivity {
     }
 
     private void validaciones() {
-
-
         String nombre = et_nombreMascota.getText().toString();
         String tipoAnimal = et_tipoAnimal.getText().toString();
         String dueño = et_dueno.getText().toString();
