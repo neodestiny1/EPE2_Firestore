@@ -6,7 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 public class MenuIngresoActivity extends AppCompatActivity {
+
+    private static final String TAG = "MainActivity";
+
+    private AdView mAdView;
 
     Button btn_cliente, btn_mascota;
 
@@ -17,6 +24,9 @@ public class MenuIngresoActivity extends AppCompatActivity {
         btn_cliente = findViewById(R.id.btn_cliente);
         btn_mascota = findViewById(R.id.btn_mascota);
 
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     public void seleccionMenu(View view) {
@@ -31,4 +41,6 @@ public class MenuIngresoActivity extends AppCompatActivity {
                 break;
         }
     }
+
+
 }
