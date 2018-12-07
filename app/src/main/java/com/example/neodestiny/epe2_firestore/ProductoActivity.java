@@ -147,6 +147,15 @@ public class ProductoActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.ic_delete:
+                if (nombre.equals("") || tipoAnimal.equals("") || dueño.equals("") || sexo.equals("")) {
+                    validaciones();
+                } else {
+                    Producto p = new Producto();
+                    p.setUid(UUID.randomUUID().toString());
+                    databaseReference.child("Cliente").child(p.getUid()).removeValue();
+                    Toast.makeText(this, "Mascota Actualizada", Toast.LENGTH_SHORT).show();
+                    limpiarCajas();
+                }
                 break;
             default:
                 break;
