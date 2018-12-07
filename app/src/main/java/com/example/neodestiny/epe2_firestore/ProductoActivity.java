@@ -120,8 +120,7 @@ public class ProductoActivity extends AppCompatActivity {
             case R.id.ic_add:
                 if (nombre.equals("") || tipoAnimal.equals("") || dueño.equals("") || sexo.equals("")) {
                     validaciones();
-                }else
-                {
+                } else {
                     Producto p = new Producto();
                     p.setUid(UUID.randomUUID().toString());
                     p.setNombre(nombre);
@@ -134,8 +133,14 @@ public class ProductoActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.ic_save:
+                Toast.makeText(this, "Mascota Agregada", Toast.LENGTH_SHORT).show();
+                limpiarCajas();
                 break;
             case R.id.ic_delete:
+                Toast.makeText(this, "Mascota Agregada", Toast.LENGTH_SHORT).show();
+                limpiarCajas();
+                break;
+            default:
                 break;
         }
 
